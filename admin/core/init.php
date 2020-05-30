@@ -11,8 +11,7 @@ $db->connect();
 $db->set_char('utf8');
  
 // Thông tin chung
-$_DOMAIN = 'http://localhost/WebTinTuc/admin/';
- 
+$_DOMAIN = 'http://localhost:8080/WebTinTuc/admin/';
 date_default_timezone_set('Asia/Ho_Chi_Minh'); 
 $date_current = '';
 $date_current = date("Y-m-d H:i:sa");
