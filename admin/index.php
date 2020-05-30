@@ -8,5 +8,11 @@ require_once 'includes/header.php';
  
 // Require footer
 require_once 'includes/footer.php';
+
+// Hiển thị sidebar
+require_once 'templates/sidebar.php';
+ 
+// Hiển thị sidebar
+require_once 'templates/content.php';
  
 ?>
