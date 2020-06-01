@@ -5,4 +5,4 @@ CREATE TABLE `website` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 INSERT INTO `website` (`title`, `descr`, `keywords`, `status`) VALUES
-('Newspage', '', '', 0);
+('News', '', '', 0);
