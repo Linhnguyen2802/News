@@ -20,7 +20,7 @@
                 <div class="media-body">
                     <h4 class="media-heading"><?php echo $data_user['display_name']; ?></h4>
                     <?php
-
+ 
                     // Hiển thị cấp bậc tài khoản
                     // Nếu tài khoản là admin
                     if ($data_user['position'] == '1')
@@ -32,7 +32,7 @@
                     {
                         echo '<span class="label label-success">Tác giả</span>';
                     }
-
+ 
                     ?>
                 </div>
             </div>
@@ -45,30 +45,30 @@
         </a>
         <a class="list-group-item" href="<?php echo $_DOMAIN; ?>posts">
             <span class="glyphicon glyphicon-edit"></span> Bài viết
-        </a>    
+        </a>  
         <a class="list-group-item" href="<?php echo $_DOMAIN; ?>photos">
             <span class="glyphicon glyphicon-picture"></span> Hình ảnh
         </a>
         <?php
-
+ 
         // Phân quyền sidebar
         // Nếu tài khoản là admin
         if ($data_user['position'] == '1')
         {
-            echo 
+            echo
             '
                 <a class="list-group-item" href="' . $_DOMAIN . 'categories">
                     <span class="glyphicon glyphicon-tag"></span> Chuyên mục
                 </a>
                 <a class="list-group-item" href="' . $_DOMAIN . 'setting">
                     <span class="glyphicon glyphicon-cog"></span> Cài đặt chung
-                </a>    
+                </a>  
             ';
         }
-
+ 
         ?>
         <a class="list-group-item" href="<?php echo $_DOMAIN; ?>signout.php">
             <span class="glyphicon glyphicon-off"></span> Thoát
         </a>
-    </ul>
-</div>
+    </ul><!-- ul.list-group -->
+</div><!-- div.sidebar -->
