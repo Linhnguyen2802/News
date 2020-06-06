@@ -29,5 +29,15 @@ else
 {
     $user = '';
 }
+// Nếu đăng nhập
+if ($user)
+{
+    // Lấy dữ liệu tài khoản
+    $sql_get_data_user = "SELECT * FROM accounts WHERE username = '$user'";
+    if ($db->num_rows($sql_get_data_user))
+    {
+        $data_user = $db->fetch_assoc($sql_get_data_user, 1);
+    }
+}
  
 ?>
