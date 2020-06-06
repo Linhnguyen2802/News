@@ -9,7 +9,7 @@
 <body>
 
     
-    <h2>Footer</h2>
+    
  
 
      <!-- Liên kết thư viện jQuery Form -->
