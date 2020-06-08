@@ -12,7 +12,7 @@ if ($user)
         // Xử lý POST action
         $action = trim(addslashes(htmlspecialchars($_POST['action'])));
 
-        // Tải chuyên mục cha trong chức năng thêm chuyên mục
+        // Tải danh mục cha trong chức năng thêm danh mục
         if ($action == 'load_add_parent_cate')
         {
             // Xử lý giá trị
@@ -25,7 +25,7 @@ if ($user)
                 $sql_get_cate = "SELECT * FROM categories WHERE type = '$type_add_parent_cate'";
                 if ($db->num_rows($sql_get_cate))
                 {
-                    // In danh sách các chuyên mục cha theo type parent
+                    // In danh sách các danh mục cha theo type parent
                     foreach ($db->fetch_assoc($sql_get_cate, 0) as $key => $data_cate)
                     {
                         echo '<option value="' . $data_cate['id_cate'] . '">' . $data_cate['label'] . '</option>';
@@ -33,11 +33,11 @@ if ($user)
                 }
                 else
                 {
-                    echo '<option value="0">Hiện chưa có chuyên mục cha nào</option>';
+                    echo '<option value="0">Hiện chưa có danh mục cha nào</option>';
                 }
             }
         }
-        // Tạo chuyên mục
+        // Tạo dannh mục
         else if ($action == 'add_cate')
         {
             // Xử lý các giá trị
@@ -60,17 +60,17 @@ if ($user)
             // Ngược lại
             else
             {
-                // Nếu type chuyên mục không phải số
+                // Nếu type danh mục không phải số
                 if (preg_match('/\D/', $type_add_cate))
                 {
                     echo $show_alert.'Đã có lỗi xảy ra, hãy thử lại sau.';
                 }
-                // Nếu sort chuyên mục không phải số nguyên dương
+                // Nếu sort danh mục không phải số nguyên dương
                 else if (preg_match('/\D/', $sort_add_cate) || $sort_add_cate < 1)
                 {
-                    echo $show_alert.'Sort chuyên mục phải là một số nguyên dương.';
+                    echo $show_alert.'Sort danh mục phải là một số nguyên dương.';
                 }
-                // Nếu id parent chuyên mục không phải số
+                // Nếu id parent danh mục không phải số
                 else if (preg_match('/\D/', $parent_add_cate))
                 {
                     echo $show_alert.'Đã có lỗi xảy ra, hãy thử lại sau';
@@ -78,7 +78,7 @@ if ($user)
                 // Nếu đúng 
                 else
                 {
-                    // Thực thi tạo chuyên mục
+                    // Thực thi tạo danh mục
                     $sql_add_cate = "INSERT INTO categories VALUES (
                         '',
                         '$label_add_cate',
@@ -120,7 +120,7 @@ if ($user)
                 }
                 else
                 {
-                    echo '<option value="0">Hiện chưa có chuyên mục cha nào' . $type_edit_cate .'</option>';
+                    echo '<option value="0">Hiện chưa có danh mục cha nào' . $type_edit_cate .'</option>';
                 }
             }
         }

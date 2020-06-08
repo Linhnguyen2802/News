@@ -33,13 +33,19 @@
         }
         else if ($tab == 'categories')
         {
-            // Hiển thị template chuyên mục
+            // Hiển thị template danh mục
             require_once 'templates/categories.php';
         }
         else if ($tab == 'setting')
         {
             // Hiển thị template cài đặt chung
             require_once 'templates/setting.php';
+        }
+
+        else if ($tab == 'accounts')
+        {
+        // Hiển thị template tài khoản
+        require_once 'templates/accounts.php';
         }
     }
     // Ngược lại không có tham số tab

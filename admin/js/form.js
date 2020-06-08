@@ -65,7 +65,7 @@ function ChangeToSlug()
 $('.slug').on('click', function() {
     ChangeToSlug();
 });
-
+/*Category*/
 // Tải danh mục cha ở chức năng thêm danh mục
 $('#formAddCate input[type="radio"]').on('click', function() {
     if ($('#formAddCate .type-add-cate-1:checked').prop("checked") == true) 
@@ -345,18 +345,18 @@ $('#del_cate').on('click', function() {
         return false;
     }
 });
-
+/*Images*/
 // Xem ảnh trước
 function preUpImg() {
     img_up = $('#img_up').val();
     count_img_up = $('#img_up').get(0).files.length;
-    $('#formUpImg .box-pre-img').html('<p><strong>Ảnh xem trước</strong></p>');
+    $('#formUpImg .box-pre-img').html('<p><strong>Xem ảnh trước</strong></p>');
     $('#formUpImg .box-pre-img').removeClass('hidden');
 
     // Nếu đã chọn ảnh
     if (img_up != '')
     {
-        $('#formUpImg .box-pre-img').html('<p><strong>Ảnh xem trước</strong></p>');
+        $('#formUpImg .box-pre-img').html('<p><strong>Xem ảnh trước</strong></p>');
         $('#formUpImg .box-pre-img').removeClass('hidden');
         for (i = 0; i <= count_img_up - 1; i++)
         {
@@ -402,7 +402,7 @@ $('#formUpImg').submit(function(e) {
         }
 
         // Kiểm tra định dạng ảnh
-        for (i = 0; i <= count_img_up - 1; i++)
+        /*for (i = 0; i <= count_img_up - 1; i++)
         {
             type_img_up = $('#img_up')[0].files[i].type;
             if (type_img_up == 'image/jpeg' || type_img_up == 'image/png' || type_img_up == 'image/gif') {
@@ -410,7 +410,7 @@ $('#formUpImg').submit(function(e) {
             } else {
                 error_type_img += 1;
             }
-        }
+        }*/
 
         // Nếu lỗi về size ảnh
         if (error_size_img >= 1) {
@@ -422,10 +422,10 @@ $('#formUpImg').submit(function(e) {
             $('#formUpImg button[type=submit]').html('Upload');
             $('#formUpImg .alert').removeClass('hidden');
             $('#formUpImg .alert').html('Số file upload cho mỗi lần vượt quá mức cho phép.');
-        } else if (error_type_img >= 1) {
+        /*} else if (error_type_img >= 1) {
             $('#formUpImg button[type=submit]').html('Upload');
             $('#formUpImg .alert').removeClass('hidden');
-            $('#formUpImg .alert').html('Một trong những file ảnh không đúng định dạng cho phép.');
+            $('#formUpImg .alert').html('Ảnh không đúng định dạng cho phép.');*/
         } else {
             $(this).ajaxSubmit({ 
                 beforeSubmit: function() {
@@ -456,5 +456,551 @@ $('#formUpImg').submit(function(e) {
         $('#formUpImg button[type=submit]').html('Upload');
         $('#formUpImg .alert').removeClass('hidden');
         $('#formUpImg .alert').html('Vui lòng chọn tệp hình ảnh.');
+    }
+});
+// Xoá nhiều hình ảnh cùng lúc
+$('#del_img_list').on('click', function() {
+    $confirm = confirm('Bạn có chắc chắn muốn xoá các hình ảnh đã chọn không?');
+    if ($confirm == true)
+    {
+        $id_img = [];
+
+        $('#list_img input[type="checkbox"]:checkbox:checked').each(function(i) {
+            $id_img[i] = $(this).val();
+        });
+
+        if ($id_img.length === 0)
+        {
+            alert('Vui lòng chọn ít nhất một hình ảnh.');
+        }
+        else
+        {
+            $.ajax({
+                url : $_DOMAIN + 'photos.php',
+                type : 'POST',
+                data : {
+                    id_img : $id_img,
+                    action : 'delete_img_list'
+                },
+                success : function(data) {
+                    location.reload();
+                }, error : function() {
+                    alert('Đã có lỗi xảy ra, hãy thử lại.');
+                }
+            });
+        }
+    }
+    else
+    {
+        return false;
+    }
+});
+
+// Xoá ảnh chỉ định
+$('.del-img').on('click', function() {
+    $confirm = confirm('Bạn có chắc chắn muốn xoá ảnh này không?');
+    if ($confirm == true)
+    {
+        $id_img = $(this).attr('data-id');
+
+        $.ajax({
+            url : $_DOMAIN + 'photos.php',
+            type : 'POST',
+            data : {
+                id_img : $id_img,
+                action : 'delete_img'
+            },
+            success : function() {
+                location.reload();
+            }
+        });
+    }
+    else
+    {
+        return false;
+    }
+});
+/*Posts*/
+// Thêm bài viết
+$('#formAddPost button').on('click', function() {
+    $title_add_post = $('#title_add_post').val();
+    $slug_add_post = $('#slug_add_post').val();
+ 
+    if ($title_add_post == '' || $slug_add_post == '') {
+        $('#formAddPost .alert').removeClass('hidden');
+        $('#formAddPost .alert').html('Vui lòng điền đầy đủ thông tin.');
+    } else {
+        $.ajax({
+            url : $_DOMAIN + 'posts.php',
+            type : 'POST',
+            data : {
+                title_add_post : $title_add_post,
+                slug_add_post : $slug_add_post,
+                action : 'add_post'
+            }, success : function(data) {
+                $('#formAddPost .alert').html(data);
+            }, error : function() {
+                $('#formAddPost .alert').removeClass('hidden');
+                $('#formAddPost .alert').html('Đã có lỗi xảy ra, hãy thử lại.');
+            }
+        });
+    }
+});
+// Tìm kiếm bài viết
+$('#formSearchPost button').on('click', function() {
+    $kw_search_post = $('#kw_search_post').val();
+ 
+    if ($kw_search_post != '') {
+        $.ajax({
+            url : $_DOMAIN + 'posts.php',
+            type : 'POST',
+            data : {
+                kw_search_post : $kw_search_post,
+                action : 'search_post'
+            }, success : function(data) {
+                $('#list_post').html(data);
+                $('#paging_post').hide();
+            }
+        });
+    }
+});
+// Tải danh mục vừa và nhỏ trong chỉnh sửa bài viết
+$('#cate_post_1').on('change', function() {
+    $parent_id = $(this).val();
+ 
+    $.ajax({
+        url : $_DOMAIN + 'posts.php',
+        type : 'POST',
+        data : {
+            parent_id : $parent_id,
+            action : 'load_cate_2'
+        }, success : function(data) {
+            $('#cate_post_2').html(data);
+ 
+            // Sau khi tải xong danh mục vừa sẽ tải danh mục nhỏ 
+            $parent_id = $('#cate_post_2').val();
+ 
+            $.ajax({
+                url : $_DOMAIN + 'posts.php',
+                type : 'POST',
+                data : {
+                    parent_id : $parent_id,
+                    action : 'load_cate_3'
+                }, success : function(data) {
+                    $('#cate_post_3').html(data);
+                }
+            });
+        }
+    });
+});
+ 
+// Tải danh mục nhỏ trong chỉnh sửa bài viết
+$('#cate_post_2').on('change', function() {
+    $parent_id = $(this).val();
+ 
+    $.ajax({
+        url : $_DOMAIN + 'posts.php',
+        type : 'POST',
+        data : {
+            parent_id : $parent_id,
+            action : 'load_cate_3'
+        }, success : function(data) {
+            $('#cate_post_3').html(data);
+        }
+    });
+});
+// Chỉnh sửa bài viết
+$('#formEditPost button').on('click', function() {
+    $id_post = $('#formEditPost').attr('data-id');
+    $stt_edit_post = $('#formEditPost input[name="stt_edit_post"]:radio:checked').val();
+    $title_edit_post = $('#title_edit_post').val();
+    $slug_edit_post = $('#slug_edit_post').val();
+    $url_thumb_edit_post = $('#url_thumb_edit_post').val();
+    $desc_edit_post = $('#desc_edit_post').val();
+    $keywords_edit_post = $('#keywords_edit_post').val();
+    $cate_1_edit_post = $('#cate_post_1').val();
+    $cate_2_edit_post = $('#cate_post_2').val();
+    $cate_3_edit_post = $('#cate_post_3').val();
+    //lấy dữ liệu trong textarea CKEditor tương ứng với id bên trong cặp [].
+    $body_edit_post = CKEDITOR.instances['body_edit_post'].getData();
+ 
+    if ($stt_edit_post == '' || $title_edit_post == '' || $slug_edit_post == '' || $cate_1_edit_post == '' || $cate_2_edit_post == '' || $cate_3_edit_post == '' || $body_edit_post == '') 
+    {
+        $('#formEditPost .alert').removeClass('hidden');
+        $('#formEditPost .alert').html('Vui lòng điền đầy đủ thông tin.');
+    } 
+    else
+    {
+        $.ajax({
+            url : $_DOMAIN + 'posts.php',
+            type : 'POST',
+            data : {
+                id_post : $id_post,
+                stt_edit_post : $stt_edit_post,
+                title_edit_post : $title_edit_post,
+                slug_edit_post : $slug_edit_post,
+                url_thumb_edit_post : $url_thumb_edit_post,
+                keywords_edit_post : $keywords_edit_post,
+                desc_edit_post : $desc_edit_post,
+                cate_1_edit_post : $cate_1_edit_post,
+                cate_2_edit_post : $cate_2_edit_post,
+                cate_3_edit_post : $cate_3_edit_post,
+                body_edit_post : $body_edit_post,
+                action : 'edit_post'
+            }, success : function(data) {
+                $('#formEditPost .alert').removeClass('hidden');
+                $('#formEditPost .alert').html(data);
+            }, error : function() {
+                $('#formEditPost .alert').removeClass('hidden');
+                $('#formEditPost .alert').html('Đã có lỗi xảy ra, hãy thử lại sau.');
+            }
+        });
+    }
+});
+// Xoá nhiều bài viết cùng lúc
+$('#del_post_list').on('click', function() {
+    $confirm = confirm('Bạn có chắc chắn muốn xoá các bài viết đã chọn không?');
+    if ($confirm == true)
+    {
+        $id_post = [];
+
+        $('#list_post input[type="checkbox"]:checkbox:checked').each(function(i) {
+            $id_post[i] = $(this).val();
+        });
+
+        if ($id_post.length === 0)
+        {
+            alert('Vui lòng chọn ít nhất một bài viết.');
+        }
+        else
+        {
+            $.ajax({
+                url : $_DOMAIN + 'posts.php',
+                type : 'POST',
+                data : {
+                    id_post : $id_post,
+                    action : 'delete_post_list'
+                },
+                success : function(data) {
+                    location.reload();
+                }, error : function() {
+                    alert('Đã có lỗi xảy ra, hãy thử lại.');
+                }
+            });
+        }
+    }
+    else
+    {
+        return false;
+    }
+});
+
+// Xoá bài viết chỉ định trong bảng danh sách
+$('.del-post-list').on('click', function() {
+    $confirm = confirm('Bạn có chắc chắn muốn xoá bài viết này không?');
+    if ($confirm == true)
+    {
+        $id_post = $(this).attr('data-id');
+
+        $.ajax({
+            url : $_DOMAIN + 'posts.php',
+            type : 'POST',
+            data : {
+                id_post : $id_post,
+                action : 'delete_post'
+            },
+            success : function() {
+                location.reload();
+            }
+        });
+    }
+    else
+    {
+        return false;
+    }
+});
+
+// Xoá bài viết chỉ định trong trang chỉnh sửa
+$('#del_post').on('click', function() {
+    $confirm = confirm('Bạn có chắc chắn muốn xoá bài viết này không?');
+    if ($confirm == true)
+    {
+        $id_post = $(this).attr('data-id');
+
+        $.ajax({
+            url : $_DOMAIN + 'posts.php',
+            type : 'POST',
+            data : {
+                id_post : $id_post,
+                action : 'delete_post'
+            },
+            success : function() {
+                location.href = $_DOMAIN + 'posts/';
+            }
+        });
+    }
+    else
+    {
+        return false;
+    }
+});
+/*website*/
+// Trạng thái website
+$('#formStatusWeb button').on('click', function() {
+    $stt_web = $('#formStatusWeb input[name="stt_web"]:radio:checked').val();
+ 
+    $.ajax({
+        url : $_DOMAIN + 'setting.php',
+        type : 'POST',
+        data : {
+            stt_web : $stt_web,
+            action : 'stt_web'
+        }, success : function() {
+            $('#formStatusWeb .alert').attr('class', 'alert alert-success');
+            $('#formStatusWeb .alert').html('Thay đổi thành công.');
+                        location.reload();
+        }, error : function() {
+            $('#formStatusWeb .alert').removeClass('hidden');
+            $('#formStatusWeb .alert').html('Đã có lỗi xảy ra, hãy thử lại.');
+        }
+    });
+});
+// Chỉnh sửa thông tin website
+$('#formInfoWeb button').on('click', function() {
+    $title_web = $('#title_web').val();
+    $descr_web = $('#descr_web').val();
+    $keywords_web = $('#keywords_web').val();
+ 
+    $.ajax({
+        url : $_DOMAIN + 'setting.php',
+        type : 'POST',
+        data : {
+            title_web : $title_web,
+            descr_web : $descr_web,
+            keywords_web : $keywords_web,
+            action : 'info_web'
+        }, success : function() {
+            $('#formInfoWeb .alert').attr('class', 'alert alert-success');
+            $('#formInfoWeb .alert').html('Thay đổi thành công.');
+            location.reload();
+        }, error : function() {
+            $('#formInfoWeb .alert').removeClass('hidden');
+            $('#formInfoWeb .alert').html('Đã có lỗi xảy ra, hãy thử lại.');
+        }
+ 
+    });
+});
+/*Accounts*/
+// Thêm tài khoản
+$('#formAddAcc button').on('click', function() {
+    $un_add_acc = $('#un_add_acc').val();
+    $pw_add_acc = $('#pw_add_acc').val();
+    $repw_add_acc = $('#repw_add_acc').val();
+ 
+    if ($un_add_acc == '' || $pw_add_acc == '' || $repw_add_acc == '')
+    {
+        $('#formAddAcc .alert').removeClass('hidden');
+        $('#formAddAcc .alert').html('Vui lòng điền đầy đủ thông tin.');
+    }
+    else
+    {
+        $.ajax({
+            url : $_DOMAIN + 'accounts.php',
+            type : 'POST',
+            data : {
+                un_add_acc: $un_add_acc,
+                pw_add_acc : $pw_add_acc,
+                repw_add_acc : $repw_add_acc,
+                action : 'add_acc'
+            }, success : function(data) {
+                $('#formAddAcc .alert').html(data);
+            }, error : function() {
+                $('#formAddAcc .alert').removeClass('hidden');
+                $('#formAddAcc .alert').html('Đã có lỗi xảy ra, hãy thử lại.');
+            }  
+        });
+    }
+});
+// Khoá nhiều tài khoản cùng lúc
+$('#lock_acc_list').on('click', function() {
+    $confirm = confirm('Bạn có chắc chắn muốn khoá các tài khoản đã chọn không?');
+    if ($confirm == true)
+    {
+        $id_acc = [];
+ 
+        $('#list_acc input[type="checkbox"]:checkbox:checked').each(function(i) {
+            $id_acc[i] = $(this).val();
+        });
+ 
+        if ($id_acc.length === 0)
+        {
+            alert('Vui lòng chọn ít nhất một tài khoản.');
+        }
+        else
+        {
+            $.ajax({
+                url : $_DOMAIN + 'accounts.php',
+                type : 'POST',
+                data : {
+                    id_acc : $id_acc,
+                    action : 'lock_acc_list'
+                },
+                success : function(data) {
+                    location.reload();
+                }, error : function() {
+                    alert('Đã có lỗi xảy ra, hãy thử lại.');
+                }
+            });
+        }
+    }
+    else
+    {
+        return false;
+    }
+});
+// Khoá tài khoản chỉ định trong bảng danh sách
+$('.lock-acc-list').on('click', function() {
+    $confirm = confirm('Bạn có chắc chắn muốn khoá tài khoản này không?');
+    if ($confirm == true)
+    {
+        $id_acc = $(this).attr('data-id');
+ 
+        $.ajax({
+            url : $_DOMAIN + 'accounts.php',
+            type : 'POST',
+            data : {
+                id_acc : $id_acc,
+                action : 'lock_acc'
+            },
+            success : function() {
+                location.reload();
+            }
+        });
+    }
+    else
+    {
+        return false;
+    }
+});
+// Mở khoá nhiều tài khoản cùng lúc
+$('#unlock_acc_list').on('click', function() {
+    $confirm = confirm('Bạn có chắc chắn muốn mở khoá các tài khoản đã chọn không?');
+    if ($confirm == true)
+    {
+        $id_acc = [];
+ 
+        $('#list_acc input[type="checkbox"]:checkbox:checked').each(function(i) {
+            $id_acc[i] = $(this).val();
+        });
+ 
+        if ($id_acc.length === 0)
+        {
+            alert('Vui lòng chọn ít nhất một tài khoản.');
+        }
+        else
+        {
+            $.ajax({
+                url : $_DOMAIN + 'accounts.php',
+                type : 'POST',
+                data : {
+                    id_acc : $id_acc,
+                    action : 'unlock_acc_list'
+                },
+                success : function(data) {
+                    location.reload();
+                }, error : function() {
+                    alert('Đã có lỗi xảy ra, hãy thử lại.');
+                }
+            });
+        }
+    }
+    else
+    {
+        return false;
+    }
+});
+// Mở tài khoản chỉ định trong bảng danh sách
+$('.unlock-acc-list').on('click', function() {
+    $confirm = confirm('Bạn có chắc chắn muốn mở khoá tài khoản này không?');
+    if ($confirm == true)
+    {
+        $id_acc = $(this).attr('data-id');
+ 
+        $.ajax({
+            url : $_DOMAIN + 'accounts.php',
+            type : 'POST',
+            data : {
+                id_acc : $id_acc,
+                action : 'unlock_acc'
+            },
+            success : function() {
+                location.reload();
+            }
+        });
+    }
+    else
+    {
+        return false;
+    }
+});
+// Xoá nhiều tài khoản cùng lúc
+$('#del_acc_list').on('click', function() {
+    $confirm = confirm('Bạn có chắc chắn muốn xoá các tài khoản đã chọn không?');
+    if ($confirm == true)
+    {
+        $id_acc = [];
+ 
+        $('#list_acc input[type="checkbox"]:checkbox:checked').each(function(i) {
+            $id_acc[i] = $(this).val();
+        });
+ 
+        if ($id_acc.length === 0)
+        {
+            alert('Vui lòng chọn ít nhất một tài khoản.');
+        }
+        else
+        {
+            $.ajax({
+                url : $_DOMAIN + 'accounts.php',
+                type : 'POST',
+                data : {
+                    id_acc : $id_acc,
+                    action : 'del_acc_list'
+                },
+                success : function(data) {
+                    location.reload();
+                }, error : function() {
+                    alert('Đã có lỗi xảy ra, hãy thử lại.');
+                }
+            });
+        }
+    }
+    else
+    {
+        return false;
+    }
+});
+// Xoá tài khoản chỉ định trong bảng danh sách
+$('.del-acc-list').on('click', function() {
+    $confirm = confirm('Bạn có chắc chắn muốn xoá tài khoản này không?');
+    if ($confirm == true)
+    {
+        $id_acc = $(this).attr('data-id');
+ 
+        $.ajax({
+            url : $_DOMAIN + 'accounts.php',
+            type : 'POST',
+            data : {
+                id_acc : $id_acc,
+                action : 'del_acc'
+            },
+            success : function() {
+                location.reload();
+            }
+        });
+    }
+    else
+    {
+        return false;
     }
 });

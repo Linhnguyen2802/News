@@ -11,7 +11,7 @@ if ($user)
     // Ngược lại tài khoản là admin
     else if ($data_user['position'] == 1)
     {
-        echo '<h3>Chuyên mục</h3>';
+        echo '<h3>Danh mục tin tức</h3>';
         // Lấy tham số ac
         if (isset($_GET['ac']))
         {
@@ -35,10 +35,10 @@ if ($user)
         // Nếu có tham số ac
         if ($ac != '') 
         {
-            // Trang thêm chuyên mục
+            // Trang thêm danh mục
             if ($ac == 'add')
             {
-                // Dãy nút của thêm chuyên mục
+                // Dãy nút của thêm danh mục
                 echo 
                 '
                     <a href="' . $_DOMAIN . 'categories" class="btn btn-default">
@@ -46,21 +46,21 @@ if ($user)
                     </a> 
                 ';
 
-                // Content thêm chuyên mục
+                // Content thêm danh mục
                 echo 
                 '   
                     <p class="form-add-cate">
                         <form method="POST" id="formAddCate" onsubmit="return false;">
                             <div class="form-group">
-                                <label>Tên chuyên mục</label>
+                                <label>Tên danh mục</label>
                                 <input type="text" class="form-control title" id="label_add_cate">
                             </div>
                             <div class="form-group">
-                                <label>URL chuyên mục</label>
+                                <label>URL danh mục</label>
                                 <input type="text" class="form-control slug" placeholder="Nhấp vào để tự tạo" id="url_add_cate">
                             </div>
                             <div class="form-group">
-                                <label>Loại chuyên mục</label>
+                                <label>Loại danh mục</label>
                                 <div class="radio">
                                     <label>
                                         <input type="radio" name="type_add_cate" value="1" checked class="type-add-cate-1"> Lớn
@@ -78,12 +78,12 @@ if ($user)
                                 </div>
                             </div>
                             <div class="form-group hidden parent-add-cate">
-                                <label>Parent chuyên mục</label>
+                                <label>Parent danh mục</label>
                                 <select id="parent_add_cate" class="form-control">
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Sort chuyên mục</label>
+                                <label>Sort danh mục</label>
                                 <input type="text" class="form-control" id="sort_add_cate">
                             </div>
                             <div class="form-group">
@@ -94,14 +94,14 @@ if ($user)
                     </p>
                 ';
             } 
-            // Trang chỉnh sửa chuyên mục
+            // Trang chỉnh sửa danh mục
             else if ($ac == 'edit')
             {
                 $sql_check_id_cate = "SELECT id_cate FROM categories WHERE id_cate = '$id'";
                 // Nếu tồn tại tham số id trong table
                 if ($db->num_rows($sql_check_id_cate)) 
                 {
-                    // Dãy nút của chỉnh sửa chuyên mục
+                    // Dãy nút của chỉnh sửa danh mục
                     echo 
                     '
                         <a href="' . $_DOMAIN . 'categories" class="btn btn-default">
@@ -112,13 +112,13 @@ if ($user)
                         </a> 
                     ';  
 
-                    // Content chỉnh sửa chuyên mục
+                    // Content chỉnh sửa danh mục
                     $sql_get_data_cate = "SELECT * FROM categories WHERE id_cate = '$id'";
                     if ($db->num_rows($sql_get_data_cate))
                     {
                         $data_cate = $db->fetch_assoc($sql_get_data_cate, 1);
 
-                        // Chỉnh sửa loại chuyên mục
+                        // Chỉnh sửa loại danh mục
                         $checked_type_1 = '';
                         $checked_type_2 = '';
                         $checked_type_3 = '';
@@ -130,7 +130,7 @@ if ($user)
                                     $parent_edit_cate .= 
                             '
                                 <div class="form-group parent-edit-cate hidden">
-                                    <label>Parent chuyên mục</label>
+                                    <label>Parent danh mục</label>
                                     <select id="parent_edit_cate" class="form-control">
                                     </select>
                                 </div>
@@ -142,14 +142,14 @@ if ($user)
                             $parent_edit_cate .= 
                             '
                                 <div class="form-group parent-edit-cate">
-                                    <label>Parent chuyên mục</label>
+                                    <label>Parent danh mục</label>
                                     <select id="parent_edit_cate" class="form-control">
                             ';
 
                             $sql_get_cate_parent = "SELECT * FROM categories WHERE type = '1'";
                             if ($db->num_rows($sql_get_cate_parent))
                             {
-                                // In danh sách các chuyên mục cha loại 1
+                                // In danh sách các danh mục cha loại 1
                                 foreach ($db->fetch_assoc($sql_get_cate_parent, 0) as $key => $data_cate_parent)
                                 {
                                     if ($data_cate['parent_id'] == $data_cate_parent['id_cate'])
@@ -164,7 +164,7 @@ if ($user)
                             }
                             else
                             {
-                                echo '<option value="0">Hiện chưa có chuyên mục cha nào</option>';
+                                echo '<option value="0">Hiện chưa có danh mục cha nào</option>';
                             }
 
                             $parent_edit_cate .= 
@@ -179,14 +179,14 @@ if ($user)
                             $parent_edit_cate .= 
                             '
                                 <div class="form-group parent-edit-cate">
-                                    <label>Parent chuyên mục</label>
+                                    <label>Parent danh mục</label>
                                     <select id="parent_edit_cate" class="form-control">
                             ';
                                                 
                             $sql_get_cate_parent = "SELECT * FROM categories WHERE type = '2'";
                             if ($db->num_rows($sql_get_cate_parent))
                             {
-                                // In danh sách các chuyên mục cha loại 2
+                                // In danh sách các danh mục cha loại 2
                                 foreach ($db->fetch_assoc($sql_get_cate_parent, 0) as $key => $data_cate_parent)
                                 {
                                     if ($data_cate['parent_id'] == $data_cate_parent['id_cate'])
@@ -201,7 +201,7 @@ if ($user)
                             }
                             else
                             {
-                                echo '<option value="0">Hiện chưa có chuyên mục cha nào</option>';
+                                echo '<option value="0">Hiện chưa có danh mục cha nào</option>';
                             }
 
                             $parent_edit_cate .= 
@@ -215,15 +215,15 @@ if ($user)
                         '   <p class="form-edit-cate">
                                 <form method="POST" id="formEditCate" data-id="' . $data_cate['id_cate'] . '" onsubmit="return false;" class="form-cate">
                                     <div class="form-group">
-                                        <label>Tên chuyên mục</label>
+                                        <label>Tên danh mục</label>
                                         <input type="text" class="form-control title" value="' . $data_cate['label'] . '" id="label_edit_cate">
                                     </div>
                                     <div class="form-group">
-                                        <label>URL chuyên mục</label>
+                                        <label>URL danh mục</label>
                                         <input type="text" class="form-control slug" value="' . $data_cate['url'] . '" id="url_edit_cate">
                                     </div>
                                     <div class="form-group">
-                                        <label>Loại chuyên mục</label>
+                                        <label>Loại danh mục</label>
                                         <div class="radio">
                                             <label>
                                                 <input type="radio" name="type_edit_cate" value="1" class="type-edit-cate-1" ' . $checked_type_1 . '> Lớn
@@ -242,7 +242,7 @@ if ($user)
                                     </div>
                                                     ' . $parent_edit_cate . '
                                     <div class="form-group">
-                                        <label>Sort chuyên mục</label>
+                                        <label>Sort danh mục</label>
                                         <input type="text" class="form-control" value="' . $data_cate['sort'] . '" id="sort_edit_cate">
                                     </div>
                                     <div class="form-group">
@@ -259,16 +259,16 @@ if ($user)
                     // Hiển thị thông báo lỗi
                     echo 
                     '
-                        <div class="alert alert-danger">ID chuyên mục đã bị xoá hoặc không tồn tại.</div>
+                        <div class="alert alert-danger">ID danh mục đã bị xoá hoặc không tồn tại.</div>
                     ';
                 }
             }
         }
         // Ngược lại không có tham số ac
-        // Trang danh sách chuyên mục
+        // Trang danh sách danh mục
         else
         {
-            // Dãy nút của danh sách chuyên mục
+            // Dãy nút của danh sách danh mục
             echo 
             '
                 <a href="' . $_DOMAIN . 'categories/add" class="btn btn-default">
@@ -282,9 +282,9 @@ if ($user)
                 </a> 
             ';
 
-            // Content danh sách chuyên mục
+            // Content danh sách danh mục
             $sql_get_list_cate = "SELECT * FROM categories ORDER BY id_cate DESC";
-            // Nếu có chuyên mục
+            // Nếu có danh mục
             if ($db->num_rows($sql_get_list_cate))
             {
                 echo 
@@ -295,18 +295,18 @@ if ($user)
                             <tr>
                                 <td><input type="checkbox"></td>
                                 <td><strong>ID</strong></td>
-                                <td><strong>Tên chuyên mục</strong></td>
+                                <td><strong>Tên danh mục</strong></td>
                                 <td><strong>Loại</strong></td>
-                                <td><strong>Chuyên mục cha</strong></td>
+                                <td><strong>Danh mục cha</strong></td>
                                 <td><strong>Sort</strong></td>
-                                <td><strong>Tools</strong></td>
+                                <td><strong>Chỉnh sửa</strong></td>
                             </tr>
                 ';
 
-                // In danh sách chuyên mục
+                // In danh sách danh mục
                 foreach ($db->fetch_assoc($sql_get_list_cate, 0) as $key => $data_cate)
                 {
-                    // Hiển thị chuyên mục cha
+                    // Hiển thị danh mục cha
                     $sql_get_cate_parent = "SELECT * FROM categories WHERE id_cate = '$data_cate[parent_id]'";
                     if ($db->num_rows($sql_get_cate_parent))
                     {
@@ -338,7 +338,7 @@ if ($user)
                           $label_cate_parent = '';
                     }
 
-                    // Hiển thị loại chuyên mục
+                    // Hiển thị loại danh mục
                     if ($data_cate['type'] == 1)
                     {
                         $data_cate['type'] = 'Lớn';
@@ -379,10 +379,10 @@ if ($user)
                     </div>
                 ';
             }
-            // Nếu không có chuyên mục
+            // Nếu không có danh mục
             else
             {
-                echo '<br><br><div class="alert alert-info">Chưa có chuyên mục nào.</div>';
+                echo '<br><br><div class="alert alert-info">Bạn chưa có danh mục nào.</div>';
             }
         }
     }

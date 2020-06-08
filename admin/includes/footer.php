@@ -18,7 +18,14 @@
     <!-- Liên kết thư viện hàm xử lý form -->
     <script src="<?php echo $_DOMAIN; ?>js/form.js"></script>
 
-    <!--sidebar-->
+    <!-- Liên kết thư viện CKEditor -->
+    <script src="<?php echo $_DOMAIN; ?>ckeditor/ckeditor.js"></script>
+        <script>
+            config = {};
+            config.entities_latin = false;
+            config.language = "vi";
+            CKEDITOR.replace("body_edit_post", config);
+        </script>
 <?php
  
 // Active sidebar
@@ -58,6 +65,10 @@ if ($tab != '')
     {
         echo '<script>$(".sidebar ul a:eq(6)").addClass("active");</script>';
     }
+    else if ($tab == 'accounts')
+{
+    echo '<script>$(".sidebar ul a:eq(7)").addClass("active");</script>';
+}
 }
  
 ?>

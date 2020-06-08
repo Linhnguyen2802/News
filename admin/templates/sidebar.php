@@ -43,12 +43,14 @@
         <a class="list-group-item" href="<?php echo $_DOMAIN; ?>profile">
             <span class="glyphicon glyphicon-user"></span> Hồ sơ cá nhân
         </a>
+       
         <a class="list-group-item" href="<?php echo $_DOMAIN; ?>posts">
             <span class="glyphicon glyphicon-edit"></span> Bài viết
         </a>  
         <a class="list-group-item" href="<?php echo $_DOMAIN; ?>photos">
             <span class="glyphicon glyphicon-picture"></span> Hình ảnh
         </a>
+
         <?php
  
         // Phân quyền sidebar
@@ -58,11 +60,14 @@
             echo
             '
                 <a class="list-group-item" href="' . $_DOMAIN . 'categories">
-                    <span class="glyphicon glyphicon-tag"></span> Chuyên mục
+                    <span class="glyphicon glyphicon-tag"></span> Danh mục tin tức
                 </a>
                 <a class="list-group-item" href="' . $_DOMAIN . 'setting">
-                    <span class="glyphicon glyphicon-cog"></span> Cài đặt chung
+                    <span class="glyphicon glyphicon-cog"></span> Cài đặt
                 </a>  
+                <a class="list-group-item" href="' . $_DOMAIN . 'accounts">
+                    <span class="glyphicon glyphicon-lock"></span> Tài khoản
+                </a>
             ';
         }
  

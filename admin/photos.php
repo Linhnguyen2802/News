@@ -40,7 +40,7 @@ if ($user)
 
 		    $path_img = $dir.$year_current.'/'.$month_current.'/'.$day_current.'/'.$name_img; // Đường dẫn thư mục chứa file
 		    move_uploaded_file($source_img, $path_img); // Upload file
-		   	$type_img = array_pop(split("\.", $name_img)); // Loại file
+		   	$type_img = array_pop(explode(".", $name_img)); // Loại file
 		   	$url_img = substr($path_img, 3); // Đường dẫn file
 		   	$size_img = $_FILES['img_up']['size'][$name]; // Dung lượng file
 
@@ -57,6 +57,54 @@ if ($user)
 		echo 'Upload thành công.';
 		$db->close();
 		new Redirect($_DOMAIN.'photos');
+	} 
+	// Nếu tồn tại POST action
+	if (isset($_POST['action']))
+	{
+		$action = trim(addslashes(htmlspecialchars($_POST['action'])));
+
+		// Xoá nhiều ảnh cùng lúc
+		if ($action == 'delete_img_list') 
+		{
+			foreach ($_POST['id_img'] as $key => $id_img)
+			{
+				$sql_check_id_img_exist = "SELECT * FROM images WHERE id_img = '$id_img'";
+				if ($db->num_rows($sql_check_id_img_exist))
+				{
+					$data_img = $db->fetch_assoc($sql_check_id_img_exist, 1);
+					if (file_exists('../'.$data_img['url']))
+					{
+						unlink('../'.$data_img['url']);
+					}
+
+					$sql_delete_img = "DELETE FROM images WHERE id_img = '$id_img'";
+					$db->query($sql_delete_img);
+				}
+			}	
+			$db->close();
+		}
+		// Xoá ảnh chỉ định
+		else if ($action == 'delete_img')
+		{		
+			$id_img = trim(htmlspecialchars(addslashes($_POST['id_img'])));
+			$sql_check_id_img_exist = "SELECT * FROM images WHERE id_img = '$id_img'";
+			if ($db->num_rows($sql_check_id_img_exist))
+			{
+				$data_img = $db->fetch_assoc($sql_check_id_img_exist, 1);
+				if (file_exists('../'.$data_img['url']))
+				{
+					unlink('../'.$data_img['url']);
+				}
+
+				$sql_delete_img = "DELETE FROM images WHERE id_img = '$id_img'";
+				$db->query($sql_delete_img);
+				$db->close();
+			}		
+		}
+	}
+	else
+	{
+		new Redirect($_DOMAIN); 
 	}
 }
 // Ngược lại chưa đăng nhập
