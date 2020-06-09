@@ -26,7 +26,7 @@ if ($user)
             echo
             '
                 <a href="' . $_DOMAIN . 'photos" class="btn btn-default">
-                    <span class="glyphicon glyphicon-arrow-left"></span> Trở về
+                    <span></span> Trở về
                 </a> 
             ';
  
@@ -69,10 +69,10 @@ if ($user)
                 <span class="glyphicon glyphicon-plus"></span> Thêm
             </a> 
             <a href="' . $_DOMAIN . 'photos" class="btn btn-default">
-                <span class="glyphicon glyphicon-repeat"></span> Reload
+                <span ></span> Reload
             </a> 
             <a class="btn btn-danger" id="del_img_list">
-                <span class="glyphicon glyphicon-trash"></span> Xoá
+                <span></span> Xoá
             </a> 
         ';
  
@@ -121,7 +121,7 @@ if ($user)
                                     <input type="text" class="form-control" value="' . str_replace('admin/', '', $_DOMAIN)  . $data_img['url'] . '" disabled>
                                     <span class="input-group-btn">
                                         <button class="btn btn-danger del-img" data-id="' . $data_img['id_img'] . '">
-                                            <span class="glyphicon glyphicon-trash"></span>
+                                            <span >Xoá</span>
                                         </button>
                                     </span>
                                 </div>

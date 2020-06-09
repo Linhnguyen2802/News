@@ -42,7 +42,7 @@ if ($user)
                 echo 
                 '
                     <a href="' . $_DOMAIN . 'categories" class="btn btn-default">
-                        <span class="glyphicon glyphicon-arrow-left"></span> Trở về
+                        <span ></span> Trở về
                     </a> 
                 ';
 
@@ -105,10 +105,10 @@ if ($user)
                     echo 
                     '
                         <a href="' . $_DOMAIN . 'categories" class="btn btn-default">
-                            <span class="glyphicon glyphicon-arrow-left"></span> Trở về
+                            <span ></span> Trở về
                         </a> 
                         <a class="btn btn-danger" id="del_cate" data-id="' . $id . '">
-                            <span class="glyphicon glyphicon-trash"></span> Xoá
+                            <span ></span> Xoá
                         </a> 
                     ';  
 
@@ -275,10 +275,10 @@ if ($user)
                     <span class="glyphicon glyphicon-plus"></span> Thêm
                 </a> 
                 <a href="' . $_DOMAIN . 'categories" class="btn btn-default">
-                    <span class="glyphicon glyphicon-repeat"></span> Reload
+                    <span ></span> Reload
                 </a> 
                 <a class="btn btn-danger" id="del_cate_list">
-                    <span class="glyphicon glyphicon-trash"></span> Xoá
+                    <span></span> Xoá
                 </a> 
             ';
 
@@ -363,10 +363,10 @@ if ($user)
                             <td>' . $data_cate['sort'] . '</td>
                             <td>
                                 <a href="' . $_DOMAIN . 'categories/edit/' . $data_cate['id_cate'] .'" class="btn btn-primary btn-sm">
-                                    <span class="glyphicon glyphicon-edit"></span>
+                                    <span >Sửa</span>
                                 </a>
                                 <a class="btn btn-danger btn-sm del-cate-list" data-id="' . $data_cate['id_cate'] . '">
-                                    <span class="glyphicon glyphicon-trash"></span>
+                                    <span>Xoá</span>
                                 </a>
                             </td>
                         </tr>

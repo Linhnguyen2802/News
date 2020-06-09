@@ -34,7 +34,7 @@ if ($user)
             echo
             '
                 <a href="' . $_DOMAIN . 'posts" class="btn btn-default">
-                    <span class="glyphicon glyphicon-arrow-left"></span> Trở về
+                    <span ></span> Trở về
                 </a> 
             ';
  
@@ -74,10 +74,10 @@ if ($user)
                     echo
                     '
                         <a href="' . $_DOMAIN . 'posts" class="btn btn-default">
-                            <span class="glyphicon glyphicon-arrow-left"></span> Trở về
+                            <span ></span> Trở về
                         </a>
                         <a class="btn btn-danger" id="del_post" data-id="' . $id . '">
-                            <span class="glyphicon glyphicon-trash"></span> Xoá
+                            <span ></span> Xoá
                         </a> 
                     ';  
      
@@ -137,10 +137,7 @@ echo '
                 <label>Url thumbnail</label>
                 <input type="text" class="form-control" value="' . $data_post['url_thumb'] . '" id="url_thumb_edit_post">
             </div>
-            <div class="form-group">
-                <label>Mô tả bài viết</label>
-                <textarea id="desc_edit_post" class="form-control">' . $data_post['desc'] . '</textarea>
-            </div>
+            
             <div class="form-group">
                 <label>Từ khoá bài viết</label>
                 <input type="text" class="form-control" value="' . $data_post['keywords'] . '" id="keywords_edit_post">
@@ -261,10 +258,10 @@ echo '
                 <span class="glyphicon glyphicon-plus"></span> Thêm
             </a> 
             <a href="' . $_DOMAIN . 'posts" class="btn btn-default">
-                <span class="glyphicon glyphicon-repeat"></span> Reload
+                <span ></span> Reload
             </a> 
             <a class="btn btn-danger" id="del_post_list">
-                <span class="glyphicon glyphicon-trash"></span> Xoá
+                <span ></span> Xoá
             </a> 
         ';
  
@@ -408,10 +405,10 @@ if ($db->num_rows($sql_get_list_post))
         echo '
                 <td>
                     <a href="' . $_DOMAIN . 'posts/edit/' . $data_post['id_post'] .'" class="btn btn-primary btn-sm">
-                        <span class="glyphicon glyphicon-edit"></span>
+                        <span>Sửa</span>
                     </a>
                     <a class="btn btn-danger btn-sm del-post-list" data-id="' . $data_post['id_post'] . '">
-                        <span class="glyphicon glyphicon-trash"></span>
+                        <span >Xoá</span>
                     </a>
                 </td>
             </tr>
