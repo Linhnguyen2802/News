@@ -6,7 +6,7 @@ class DB
     // Các biến thông tin kết nối
     private $hostname = 'localhost',
             $username = 'root',
-            $password = '',
+            $password = '12345',
             $dbname = 'news';
  
     // Biến lưu trữ kết nối

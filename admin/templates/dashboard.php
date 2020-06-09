@@ -176,7 +176,6 @@
   '
     <div class="col-md-4">
       <div class="alert alert-danger">
-        <h1>' . $count_img_error . '</h1>
         <p>' . $label . '</p>
       </div>
     </div>
