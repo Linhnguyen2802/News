@@ -11,13 +11,13 @@
            		 <form method="POST" id="formSignin" onsubmit="return false;">
               	  <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                        <span class="input-group-addon"><span >Tài khoản</span></span>
                         <input type="text" class="form-control" placeholder="Tên đăng nhập" id="user_signin">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        <span class="input-group-addon"><span >Mật Khẩu</span></span>
                         <input type="password" class="form-control" placeholder="Mật khẩu" id="pass_signin">
                     </div>
                 </div>
