@@ -6,14 +6,16 @@
                     <img class="media-object" src="
                     <?php
                         // URL ảnh đại diện tài khoản
+
                         if ($data_user['url_avatar'] == '')
                         {
                             echo $_DOMAIN.'images/profile.png';
                         }
                         else
                         {
-                            echo $data_user['url_avatar'];
+                            echo str_replace('admin/', '', $_DOMAIN).$data_user['url_avatar'];
                         }
+                        
                     ?>
                     " alt="Ảnh đại diện của <?php echo $data_user['display_name']; ?>" width="64" height="64">
                 </a>
@@ -38,7 +40,7 @@
             </div>
         </li>
         <a class="list-group-item active" href="<?php echo $_DOMAIN; ?>">
-            <span ></span> Bảng điều khiển
+            <span  ></span> Bảng điều khiển
         </a>
         <a class="list-group-item" href="<?php echo $_DOMAIN; ?>profile">
             <span ></span> Hồ sơ cá nhân
