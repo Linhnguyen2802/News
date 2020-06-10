@@ -185,12 +185,12 @@
   ?>
 </div>
  
-<!-- Dashboard chuyên mục -->
-<h3>Chuyên mục</h3>
+<!-- Dashboard Danh mục -->
+<h3>Danh mục tin tức</h3>
 <div class="row">
   <?php
  
-  // Lấy tổng chuyên mục
+  // Lấy tổng danh mục
   $sql_get_count_cate = "SELECT id_cate FROM categories";   
   $count_cate = $db->num_rows($sql_get_count_cate);
  
@@ -199,7 +199,7 @@
     <div class="col-md-3">
       <div class="alert alert-info">
         <h1>' . $count_cate . '</h1>
-        <p>Tổng chuyên mục</p>
+        <p>Tổng danh mục</p>
       </div>
     </div>
   ';
@@ -208,7 +208,7 @@
  
   <?php
  
-  // Lấy số chuyên mục lớn
+  // Lấy số danh mục lớn
   $sql_get_count_cate_1 = "SELECT id_cate FROM categories WHERE type = '1'";   
   $count_cate_1 = $db->num_rows($sql_get_count_cate_1);
  
@@ -217,7 +217,7 @@
     <div class="col-md-3">
       <div class="alert alert-success">
         <h1>' . $count_cate_1 . '</h1>
-        <p>Chuyên mục lớn</p>
+        <p>Danh mục lớn</p>
       </div>
     </div>
   ';
@@ -226,7 +226,7 @@
  
   <?php
  
-  // Lấy số chuyên mục vừa
+  // Lấy số danh mục vừa
   $sql_get_count_cate_2 = "SELECT id_cate FROM categories WHERE type = '2'";   
   $count_cate_2 = $db->num_rows($sql_get_count_cate_2);
  
@@ -235,7 +235,7 @@
     <div class="col-md-3">
       <div class="alert alert-warning">
         <h1>' . $count_cate_2 . '</h1>
-        <p>Chuyên mục vừa</p>
+        <p>Danh mục vừa</p>
       </div>
     </div>
   ';
@@ -244,7 +244,7 @@
  
   <?php
  
-  // Lấy số chuyên mục nhỏ
+  // Lấy số danh mục nhỏ
   $sql_get_count_cate_3 = "SELECT id_cate FROM categories WHERE type = '3'";   
   $count_cate_3 = $db->num_rows($sql_get_count_cate_3);
  
@@ -253,7 +253,7 @@
     <div class="col-md-3">
       <div class="alert alert-danger">
         <h1>' . $count_cate_3 . '</h1>
-        <p>Chuyên mục nhỏ</p>
+        <p>Danh mục nhỏ</p>
       </div>
     </div>
   ';

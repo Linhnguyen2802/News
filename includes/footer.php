@@ -18,7 +18,7 @@
         </div>
     </div>
 </div>      
-        <script src="<?php echo $_DOMAIN; ?>admin/bootstrap/js/bootstrap.min.js"></script>
         <script src="<?php echo $_DOMAIN; ?>admin/js/jquery.min.js"></script>
+        <script src="<?php echo $_DOMAIN; ?>admin/bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>

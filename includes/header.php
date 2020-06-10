@@ -17,11 +17,11 @@ if (isset($_GET['sp']) && isset($_GET['id'])) {
     } else {
         $title = $title_error_404;
     }
-// Url chuyên mục
+// Url danh mục
 } else if (isset($_GET['sc'])) {
     $slug_cate = trim(htmlspecialchars($_GET['sc']));
  
-    // Kiểm tra chuyên mục tồn tại
+    // Kiểm tra danh mục tồn tại
     $sql_check_cate = "SELECT url, label FROM categories WHERE url = '$slug_cate'";
     if ($db->num_rows($sql_check_cate)) {
         $data_cate = $db->fetch_assoc($sql_check_cate, 1);
@@ -63,15 +63,15 @@ if (isset($_GET['sp']) && isset($_GET['id'])) {
             <ul class="nav navbar-nav">
                 <?php
                          
-                        // Lấy danh sách chuyên mục cấp 1
+                        // Lấy danh sách danh mục cấp 1
                 $sql_get_list_menu_1 = "SELECT * FROM categories WHERE type = '1' ORDER BY sort ASC";
                 if ($db->num_rows($sql_get_list_menu_1)) {
                                 // In chuyên mục cấp 1
                     foreach ($db->fetch_assoc($sql_get_list_menu_1, 0) as $data_menu_1) {
-                                        // Lấy chuyên mục cấp 2 theo id cha (cấp 1)
+                                        // Lấy danh mục cấp 2 theo id cha (cấp 1)
                         $sql_get_list_menu_2 = "SELECT * FROM categories WHERE type = '2' AND parent_id = '$data_menu_1[id_cate]' ORDER BY sort ASC";
                         if ($db->num_rows($sql_get_list_menu_2)) {
-                                                // In chuyên mục cấp 2
+                                                // In danh mục cấp 2
                             $sub_menu = '<ul class="dropdown-menu">';
                                 foreach ($db->fetch_assoc($sql_get_list_menu_2, 0) as $data_menu_2) {
                                     $sub_menu .= '<li><a href="' . $_DOMAIN . 'category/' . $data_menu_2['url'] . '">' . $data_menu_2['label'] . '</a></li>';
