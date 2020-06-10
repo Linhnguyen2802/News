@@ -40,7 +40,7 @@
             </div>
         </li>
         <a class="list-group-item active" href="<?php echo $_DOMAIN; ?>">
-            <span  ></span> Bảng điều khiển
+            <span  ></span> Bảng thống kê
         </a>
         <a class="list-group-item" href="<?php echo $_DOMAIN; ?>profile">
             <span ></span> Hồ sơ cá nhân

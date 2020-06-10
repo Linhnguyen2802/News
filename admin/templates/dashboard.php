@@ -84,7 +84,7 @@
   if ($data_user['position'] == '1') {
     // Lấy tổng số hình ảnh
     $sql_get_count_img = "SELECT id_img FROM images";
-    $label = 'Tổng hình ảnh';
+    $label = 'tổng hình ảnh';
   } else {
     // Lấy số hình ảnh của tác giả
     $sql_get_count_img = "SELECT id_img FROM images WHERE uploader_id = '$data_user[id_acc]'";
@@ -110,11 +110,11 @@
   if ($data_user['position'] == '1') {
     // Lấy tổng dung lượng ảnh
     $sql_get_size_img = "SELECT size FROM images";
-    $label = 'Tổng dung lượng ảnh';
+    $label = 'tổng dung lượng ảnh';
   } else {
     // Lấy số dung lượng ảnh của tác giả
     $sql_get_size_img = "SELECT size FROM images WHERE uploader_id = '$data_user[id_acc]'";
-    $label = 'Dung lượng ảnh';
+    $label = 'dung lượng ảnh';
   }
  
   // Tính dung lượng hình ảnh
@@ -155,11 +155,11 @@
   if ($data_user['position'] == '1') {
     // Lấy tổng số hình ảnh
     $sql_get_count_img = "SELECT url FROM images";
-    $label = 'Tổng hình ảnh lỗi';
+    $label = 'tổng hình ảnh lỗi';
   } else {
     // Lấy số bài viết của tác giả
     $sql_get_count_img = "SELECT url FROM images WHERE uploader_id = '$data_user[id_acc]'";
-    $label = 'Hình ảnh lỗi';
+    $label = 'hình ảnh lỗi';
   }
  
   // Kiểm tra danh sách hình ảnh
@@ -176,6 +176,7 @@
   '
     <div class="col-md-4">
       <div class="alert alert-danger">
+        <h1>' . $count_img_error . '</h1>
         <p>' . $label . '</p>
       </div>
     </div>
@@ -183,13 +184,6 @@
  
   ?>
 </div>
-
-
-<?php
- 
-if ($data_user['position'] == '1') {
- 
-?>
  
 <!-- Dashboard chuyên mục -->
 <h3>Chuyên mục</h3>
@@ -269,11 +263,6 @@ if ($data_user['position'] == '1') {
  
 <!-- Dashboard tài khoản -->
  
-<?php
- 
-}
- 
-?>
 
 <h3>Tài khoản</h3>
 <div class="row">

@@ -24,7 +24,7 @@
     // Nếu có tham số tab
     if ($tab != '')
     {
-        // Tháo active của Bảng điều khiển
+        // Tháo active của Thống kê
         echo '<script>$(".sidebar ul a:eq(1)").removeClass("active");</script>';
         // Active theo giá trị của tham số tab
         if ($tab == 'profile')

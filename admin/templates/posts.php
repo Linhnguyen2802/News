@@ -83,14 +83,14 @@ if ($user)
      
                     // Content chỉnh sửa bài viết
                     $sql_get_data_post = "SELECT * FROM posts WHERE id_post = '$id'";
-$data_post = $db->fetch_assoc($sql_get_data_post, 1);
-echo
-'
-    <p class="form-edit-post">
-        <form method="POST" id="formEditPost" data-id="' . $id . '" onsubmit="return false;">
-            <div class="form-group">
-                <label>Trạng thái bài viết</label>
-';
+                    $data_post = $db->fetch_assoc($sql_get_data_post, 1);
+                    echo
+                    '
+                        <p class="form-edit-post">
+                            <form method="POST" id="formEditPost" data-id="' . $id . '" onsubmit="return false;">
+                                <div class="form-group">
+                                    <label>Trạng thái bài viết</label>
+                    ';
  
 // Trạng thái bài viết
 // Nếu đã xuất bản
